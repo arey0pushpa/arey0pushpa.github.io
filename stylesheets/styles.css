@@ -1,5 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 
+.description {
+  color: #fff;
+}
+
+.description em {
+  color: #ffa500;
+}
+
 body {
   padding:50px;
   font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -435,18 +443,3 @@ $width: 200px
 		.top.current,
 		.bottom.current
 			display: none
-
-// presentation styles
-@import url(https://fonts.googleapis.com/css?family=Oswald)
-
-html,
-body
-	height: 100%
-	width: 100%
-
-body
-	background: #202020 url(https://cl.ly/image/040I101f1i0I/planes.jpg) 50% 50%
-	background-origin: 50% 50%
-	+background-size(cover)
-	font-family: 'Oswald'
-
