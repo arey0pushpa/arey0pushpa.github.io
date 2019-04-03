@@ -21,71 +21,144 @@ Countdown = function() {
 	this.update();
 };
 
-Countdown.prototype = {
-	duration: 1000,
+// Create Countdown
+var Countdown = {
 
-	setVars: function(time, el, template) {
-		this.max = time;
-		this.time = time;
-		this.el = el;
-		this.template = _(template.innerHTML).template();
-		this.delta = -1;
-	},
+  // Backbone-like structure
+  $el: $('.countdown'),
 
-	update: function() {
-		this.checkTime();
-		this.setSizes();
+  // Params
+  countdown_interval: null,
+  total_seconds     : 0,
 
-		this.setupAnimation();
-		_(this.executeAnimation).delay(20);
-		_(this.finishAnimation).delay(this.duration * 0.9);
+  // Initialize the countdown
+  init: function() {
 
-		_(this.update).delay(this.duration);
-	},
+    // DOM
+		this.$ = {
+    	hours  : this.$el.find('.bloc-time.hours .figure'),
+    	minutes: this.$el.find('.bloc-time.min .figure'),
+    	seconds: this.$el.find('.bloc-time.sec .figure')
+   	};
 
-	checkTime: function() {
-		this.time += this.delta;
+    // Init countdown values
+    this.values = {
+	      hours  : this.$.hours.parent().attr('data-init-value'),
+        minutes: this.$.minutes.parent().attr('data-init-value'),
+        seconds: this.$.seconds.parent().attr('data-init-value'),
+    };
 
-		if (this.time === 0) this.delta = 1;
-		if (this.time === this.max) this.delta = -1;
+    // Initialize total seconds
+    this.total_seconds = this.values.hours * 60 * 60 + (this.values.minutes * 60) + this.values.seconds;
 
-		this.delta === 1 ? this.toggleDirection('up', 'down') : this.toggleDirection('down', 'up');
+    // Animate countdown to the end
+    this.count();
+  },
 
-		this.nextTime = this.time + this.delta;
-	},
+  count: function() {
 
-	toggleDirection: function(add, remove) {
-		this.el.classList.add(add);
-		this.el.classList.remove(remove);
-	},
+    var that    = this,
+        $hour_1 = this.$.hours.eq(0),
+        $hour_2 = this.$.hours.eq(1),
+        $min_1  = this.$.minutes.eq(0),
+        $min_2  = this.$.minutes.eq(1),
+        $sec_1  = this.$.seconds.eq(0),
+        $sec_2  = this.$.seconds.eq(1);
 
-	setSizes: function() {
-		this.currentSize = this.getSize(this.time);
-		this.nextSize = this.getSize(this.nextTime);
-	},
+        this.countdown_interval = setInterval(function() {
 
-	getSize: function(time) {
-		return time > 9 ? 'small' : '';
-	},
+        if(that.total_seconds > 0) {
 
-	setupAnimation: function() {
-		this.el.innerHTML = this.template(this);
-		this.el.classList.remove('changed');
-	},
+            --that.values.seconds;
 
-	executeAnimation: function() {
-		this.el.classList.add('changing');
-	},
+            if(that.values.minutes >= 0 && that.values.seconds < 0) {
 
-	finishAnimation: function() {
-		this.el.classList.add('changed');
-		this.el.classList.remove('changing');
-	}
+                that.values.seconds = 59;
+                --that.values.minutes;
+            }
+
+            if(that.values.hours >= 0 && that.values.minutes < 0) {
+
+                that.values.minutes = 59;
+                --that.values.hours;
+            }
+
+            // Update DOM values
+            // Hours
+            that.checkHour(that.values.hours, $hour_1, $hour_2);
+
+            // Minutes
+            that.checkHour(that.values.minutes, $min_1, $min_2);
+
+            // Seconds
+            that.checkHour(that.values.seconds, $sec_1, $sec_2);
+
+            --that.total_seconds;
+        }
+        else {
+            clearInterval(that.countdown_interval);
+        }
+    }, 1000);
+  },
+
+  animateFigure: function($el, value) {
+
+     var that         = this,
+		     $top         = $el.find('.top'),
+         $bottom      = $el.find('.bottom'),
+         $back_top    = $el.find('.top-back'),
+         $back_bottom = $el.find('.bottom-back');
+
+    // Before we begin, change the back value
+    $back_top.find('span').html(value);
+
+    // Also change the back bottom value
+    $back_bottom.find('span').html(value);
+
+    // Then animate
+    TweenMax.to($top, 0.8, {
+        rotationX           : '-180deg',
+        transformPerspective: 300,
+	      ease                : Quart.easeOut,
+        onComplete          : function() {
+
+            $top.html(value);
+
+            $bottom.html(value);
+
+            TweenMax.set($top, { rotationX: 0 });
+        }
+    });
+
+    TweenMax.to($back_top, 0.8, {
+        rotationX           : 0,
+        transformPerspective: 300,
+	      ease                : Quart.easeOut,
+        clearProps          : 'all'
+    });
+  },
+
+  checkHour: function(value, $el_1, $el_2) {
+
+    var val_1       = value.toString().charAt(0),
+        val_2       = value.toString().charAt(1),
+        fig_1_value = $el_1.find('.top').html(),
+        fig_2_value = $el_2.find('.top').html();
+
+    if(value >= 10) {
+
+        // Animate only if the figure has changed
+        if(fig_1_value !== val_1) this.animateFigure($el_1, val_1);
+        if(fig_2_value !== val_2) this.animateFigure($el_2, val_2);
+    }
+    else {
+
+        // If we are under 10, replace first figure with 0
+        if(fig_1_value !== '0') this.animateFigure($el_1, 0);
+        if(fig_2_value !== val_1) this.animateFigure($el_2, val_1);
+    }
+  }
 };
 
-new Countdown(
-	12,
-	document.querySelector('.count'),
-	document.querySelector('#count-template')
-);
-
+// Let's go !
+Countdown.init();

@@ -191,255 +191,180 @@ footer {
   bottom:50px;
 }
 
-@media print, screen and (max-width: 960px) {
-  
-  div.wrapper {
-    width:auto;
-    margin:0;
-  }
-  
-  header, section, footer {
-    float:none;
-    position:static;
-    width:auto;
-  }
-  
-  header {
-    padding-right:320px;
-  }
-  
-  section {
-    border:1px solid #e5e5e5;
-    border-width:1px 0;
-    padding:20px 0;
-    margin:0 0 20px;
-  }
-  
-  header a small {
-    display:inline;
-  }
-  
-  header ul {
-    position:absolute;
-    right:50px;
-    top:52px;
+
+@import "compass/css3";
+
+// Global
+body {
+  background-color: #f2f1ed;
+}
+
+.wrap {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 310px;
+}
+
+a {
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+// Variables
+$lato: 'Lato';
+
+// Title
+h1 {
+  margin-bottom: 60px;
+  text-align: center;
+  font: 300 2.25em $lato;
+  text-transform: uppercase;
+
+  strong {
+    font-weight: 400;
+    color: #ea4c4c;
   }
 }
 
-@media print, screen and (max-width: 720px) {
-  body {
-    word-wrap:break-word;
-  }
-  
-  header {
-    padding:0;
-  }
-  
-  header ul, header p.view {
-    position:static;
-  }
-  
-  pre, code {
-    word-wrap:normal;
+h2 {
+  margin-bottom: 80px;
+  text-align: center;
+  font: 300 0.7em $lato;
+  text-transform: uppercase;
+
+  strong {
+    font-weight: 400;
   }
 }
 
-@media print, screen and (max-width: 480px) {
-  body {
-    padding:15px;
+// Countdown
+.countdown {
+  width: 720px;
+  margin: 0 auto;
+
+  .bloc-time {
+    float: left;
+    margin-right: 45px;
+    text-align: center;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
-  
-  header ul {
-    display:none;
+
+  .count-title {
+    display: block;
+    margin-bottom: 15px;
+    font: normal 0.94em $lato;
+    color: #1a1a1a;
+    text-transform: uppercase;
+  }
+
+  .figure {
+    position: relative;
+    float: left;
+    height: 110px;
+    width: 100px;
+    margin-right: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    @include box-shadow(0 3px 4px 0 rgba(0, 0, 0, .2),inset 2px 4px 0 0 rgba(255, 255, 255, .08));
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    >span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      font: normal 5.94em/107px $lato;
+      font-weight: 700;
+      color: #de4848;
+    }
+
+    .top, .bottom-back {
+      &:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+      }
+    }
+
+    .top {
+      z-index: 3;
+      background-color: #f7f7f7;
+      transform-origin: 50% 100%;
+      -webkit-transform-origin: 50% 100%;
+      @include border-top-radius(10px);
+      @include transform(perspective(200px));
+    }
+
+    .bottom {
+      z-index: 1;
+
+      &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background-color: rgba(0, 0, 0, .02);
+      }
+    }
+
+    .bottom-back {
+      z-index: 2;
+      top: 0;
+      height: 50%;
+      overflow: hidden;
+      background-color: #f7f7f7;
+      @include border-top-radius(10px);
+
+      span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    }
+
+    .top, .top-back {
+      height: 50%;
+      overflow: hidden;
+      @include backface-visibility(hidden);
+    }
+
+    .top-back {
+      z-index: 4;
+      bottom: 0;
+      background-color: #fff;
+      -webkit-transform-origin: 50% 0;
+      transform-origin: 50% 0;
+      @include transform(perspective(200px) rotateX(180deg));
+      @include border-bottom-radius(10px);
+
+      span {
+        position: absolute;
+        top: -100%;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    }
   }
 }
 
-@media print {
-  body {
-    padding:0.4in;
-    font-size:12pt;
-    color:#444;
-  }
-}
-@import compass
-
-// animation vars
-$duration: 0.35s
-$bounce: cubic-bezier(0.375, 1.495, 0.610, 0.780)
-
-// dimensions
-$height: 300px
-$width: 200px
-
-.count
-	box-shadow: 0 10px 5px -5px rgba(#000, 0.2)
-	height: $height
-	left: 50%
-	line-height: $height
-	margin: -($height / 2) 0 0 -($width / 2)
-	+perspective(500px)
-	position: absolute
-	text-align: center
-	top: 50%
-	+translateZ(0)
-	width: $width
-
-	// the basic "card"
-	//    there are four of these: top current, top next, bottom current, and bottom next
-	span
-		background: #202020
-		color: #f8f8f8
-		display: block
-		font-size: 250px
-		left: 0
-		position: absolute
-		top: 0
-		text-shadow: 0 1px 0 (#000 + 40), 0 2px 0 (#000 + 30), 0 3px 0 (#000 + 20), 0 4px 0 (#000 + 10), 0 5px 0 #000, 0 0 10px rgba(#000, 0.8)
-		+transform-origin(0, 150px, 0)
-		width: 100%
-
-		// the dividing line in the center
-		&:before
-			border-bottom: 2px solid #000
-			content: ''
-			left: 0
-			position: absolute
-			width: 100%
-
-		// a shadow fill that adds some convexity on the card surfaces
-		&:after
-			box-shadow: inset 0 0 60px rgba(#000, 0.35)
-			content: ''
-			height: 100%
-			left: 0
-			position: absolute
-			top: 0
-			width: 100%
-
-	// two-digit numbers get the 'small' class
-	.small
-		font-size: 175px
-
-	.top
-		// top card sit above the bottom ones, so if we give them the same
-		//   border radius they'll create some crunchiness.
-		//   instead, go one pixel smaller
-		border-top-left-radius: 11px
-		border-top-right-radius: 11px
-
-		// creating a light shine on the top of the card
-		box-shadow: inset 0 2px rgba(#000, 0.9), inset 0 3px 0 rgba(#fff, 0.4)
-
-		// top cards are only 50% height, and overflow-hidden
-		//   so they only show the top of their number
-		height: 50%
-		overflow: hidden
-
-		&:before
-			bottom: 0
-
-		&:after
-			// top card needs to get darker as it curves downward
-			+background(linear-gradient(rgba(#000, 0), rgba(#000, 0.15)))
-			border-top-left-radius: 11px
-			border-top-right-radius: 11px
-
-	.bottom
-		// bottom cards are 100% height, but their top half is hidden by "top" cards
-		//   this was the best way I could think of to show the bottom cards in half, but
-		//   there's probably another way using display: table-cell and vertical-align.
-		//   ew.
-		border-radius: 10px
-		height: 100%
-
-		&:before
-			top: 50%
-
-		&:after
-			border-radius: 10px
-			+background(linear-gradient(rgba(#fff, 0.1), rgba(#fff, 0.1) 50%, rgba(#fff, 0)))
-
-	// styles that only apply when counting "down"
-	&.down
-		.top
-			// use a higher number than the bottoms to prevent crunchy border radiuses
-			border-top-left-radius: 11px
-			border-top-right-radius: 11px
-			height: 50%
-
-			&.current
-				// required to prevent safari bug: https://bugs.webkit.org/show_bug.cgi?id=61824
-				+transform-style(flat)
-				z-index: 3
-
-			&.next
-				// when counting down, the next top card is rotated towards the user (and invisible)
-				+transform(rotate3d(1, 0, 0, -90deg))
-				z-index: 4
-
-		.bottom
-			border-radius: 10px
-
-			&.current
-				z-index: 2
-
-			&.next
-				z-index: 1
-
-		&.changing
-			.bottom.current
-				box-shadow: 0 75px 5px -20px rgba(#000, 0.3)
-				+transform(rotate3d(1, 0, 0, 90deg))
-
-				// the current bottom card rotates up to hide itself, and reveal the next one
-				+transition(transform $duration ease-in, box-shadow $duration ease-in)
-
-		&.changing,
-		&.changed
-			.top.next
-				// and the next top card rotates into view (after $duration)
-				+transition(transform $duration ease-out $duration)
-				+transform(none)
-
-	&.up
-		.top
-			height: 50%
-
-			&.current
-				z-index: 4
-
-			&.next
-				z-index: 3
-
-		.bottom
-			&.current
-				z-index: 1
-
-			&.next
-				box-shadow: 0 75px 5px -20px rgba(#000, 0.3)
-
-				// when counting "up", the next bottom card begins pointed at the user...
-				+transform(rotate3d(1, 0, 0, 90deg))
-				z-index: 2
-
-		&.changing
-			.top.current
-				// and the current top card does the rotating
-				+transform(rotate3d(1, 0, 0, -90deg))
-
-				// when the card is "dropping" it should be faster
-				+transition(transform $duration * 0.75 ease-in, box-shadow $duration * 0.75 ease-in)
-
-		&.changing,
-		&.changed
-			.bottom.next
-				box-shadow: 0 0 0 0 rgba(#000, 0)
-
-				// add a little bounce at the moment the card finishes falling
-				+transition(box-shadow $duration / 2 $bounce $duration, transform $duration $bounce $duration)
-				+transform(rotate3d(1, 0, 0, 0))
-
-	&.changed
-		.top.current,
-		.bottom.current
-			display: none
