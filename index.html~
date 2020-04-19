@@ -15,30 +15,48 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Welcome to Intracellular Vesicular Traffic Model Homepage</h1>
-      <br/>
+	      <h1>We are launching our WEBSITE SOON! 
+		<a id="soupgal.co.uk" href="soupgal.co.uk">soupgal.co.uk</a>
+	      </h1>
                
-       <h3>About Me</h3>
-        <img src="http://pickuplinesworld.com/wp-content/uploads/2015/08/biology-jokes-9.jpg" alt="">               
-            
+	      <div class="count"></div>
+
+<script id="count-template" type="text/template">
+ <span class="current top <%= currentSize %>"><%= time %></span>
+ <span class="next top <%= nextSize %>"><%= nextTime %></span>
+ <span class="current bottom <%= currentSize %>"><%= time %></span>
+ <span class="next bottom <%= nextSize %>"><%= nextTime %></span>
+</script>
+
+        <img src="./soup.jpg" alt="">               
+	      <div style="text-align:center;padding:1em 0;"> <h3> 
+	        <iframe width="300" height="154" src="https://w2.countingdownto.com/2954746" frameborder="0"></iframe>
+	      </div>
+
         <p class="view"><a href="https://github.com/arey0pushpa">View My GitHub Profile</a></p>
 
       </header>
       <section>
-        <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Membrane vesicle trafficking .</h3>
+        <h1>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Soup Gal -- Hey Girl!</h1>
   <p>
-            Membrane vesicle trafficking in eukaryotic animal cells involves movement of important biochemical signal molecules from synthesis-and-packaging locations in Golgi body to specific 'release' locations on the inside of the plasma membrane of the secretory cell, in the form of Golgi membrane-bound micro-sized vesicles, termed membrane vesicles (MVs). In this process, the 'packed' cellular products are released/secreted outside the cell across plasma membrane. However,
-            vesicular membrane is retained and recycled by the secretory cells. 
+  <font size="4"> <i>We help people around the world to come to Austria and make their favoriate <em>soups!</em> </i>
+  
+  </font>
+
 <br />
 <br />
-<img src="https://classconnection.s3.amazonaws.com/222/flashcards/1869222/jpg/transp_pathways1362626201887.jpg" alt=""Na_Re />
+        <img src="./soup1.jpg" alt="">               
 <br />
 <br />
-This phenomenon has key role in synaptic neurotransmission, endocrine secretion, mucous secretion, granular-product secretion by neutrophils,etc. The scientists behind this discovery were awarded Nobel prize for the year 2013. In the prokaryotic gram-negative bacterial cells, membrane vesicle trafficking is mediated via bacterial outer membrane bounded nano-sized vesicles, called bacterial outer membrane
-            vesicles, (OMVs).
-            <br /> In this case, however, the OMV membrane is secreted as well, along with OMV-contents to outside the secretion-active bacterium. This phenomenon has key role in host-pathogen interactions, endotoxic shock in patients, invasion and infection of animals/plants, inter-species bacterial competition, qourum sensing, exocytosis,etc.
         </p>
+	Combining her passions for healthy eating, animal welfare and food sustainability, the soup gal developed dry soup mixes with the aim of creating healthy, delicious, vegetarian foods that are suitable for busy lifestyles.
+
+A vegetarian since the age of 10, she began experimenting in the kitchen at an early age. Over time she learned to cook nutritious vegetarian meals and maximize flavour by using lots of spices and herbs. Her soup flavours are inspired by her frequent culinary adventures in her own kitchen, as well as in many parts of the world.
+
+Each jar of dry soup mix creates 8 cups of soup – just add water and cook for an hour! There are currently 12 unique and tasty flavours – all filled with simple, wholesome ingredients and featuring Canadian lentils and split peas.
+
+Eat well and enjoy!
   
   </footer>
     </div>
